@@ -45,6 +45,11 @@ CPMAddPackage(
   GITHUB_REPOSITORY kbinani/defer
   GIT_TAG b1fa5b1d3d5886c7d07487499febc8d77095d170)
 
+CPMAddPackage(
+  NAME ZLIB
+  GITHUB_REPOSITORY madler/zlib
+  VERSION 1.3.1)
+
 set(je2be_header_files
   #begin je2be-header files
   include/je2be.hpp
@@ -462,6 +467,12 @@ endif()
 
 list(APPEND je2be_include_directories ${LZ4_BINARY_DIR}/lib)
 list(APPEND je2be_include_directories ${icu-cmake_BINARY_DIR}/include)
+
+set(ZLIB_FOUND TRUE CACHE BOOL "" FORCE)
+set(ZLIB_LIBRARIES ${zlib_BINARY_DIR}/$<CONFIG>/zlibstatic$<$<CONFIG:Debug>:d>.lib CACHE STRING "" FORCE)
+set(ZLIB_LIBRARY ${zlib_BINARY_DIR}/$<CONFIG>/zlibstatic$<$<CONFIG:Debug>:d>.lib CACHE STRING "" FORCE)
+set(ZLIB_INCLUDE_DIRS ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR} CACHE STRING "" FORCE)
+set(ZLIB_INCLUDE_DIR ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR} CACHE STRING "" FORCE)
 
 CPMAddPackage(
   NAME leveldb
